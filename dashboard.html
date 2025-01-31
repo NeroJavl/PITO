@@ -1,0 +1,958 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturn360 Profile</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .top-banner {
+            background-image: url('https://i.ibb.co/D4MMfj8/images.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 0 15px;  
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            height: 50px;  
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;  
+        }
+
+        .logo {
+            height: 30px;  
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .banner-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;  
+        }
+
+        .price-icon {
+            width: 24px;  
+            height: 24px;
+            cursor: pointer;
+            margin-right: 5px;  
+        }
+
+        .price-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: white;
+        }
+
+        .notification-icon, .chat-icon {
+            width: 24px;  
+            height: 24px;
+            cursor: pointer;
+            margin-right: 5px;  
+        }
+
+        .profile-pic {
+            width: 30px;  
+            height: 30px;
+            border-radius: 50%;
+            background: #4a5b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-left: 15px;  
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-container {
+            padding: 15px;
+            padding-top: 65px;
+            background-color: white;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .search-bar {
+            display: none;
+        }
+
+        .credits-section {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .credits-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .credits-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .credits-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .credits-description {
+            font-size: 12px;
+            color: #777;
+            flex-grow: 1;
+            margin-right: 15px;
+        }
+
+        .credits-buy-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .credits-buy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .account-summary {
+            display: none; 
+        }
+
+        .summary-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .summary-total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .summary-progress {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .summary-progress-bar {
+            width: 65%;
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #81c784);
+        }
+
+        .search-categories {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .search-categories-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .search-categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .search-category-item {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .search-category-item:hover {
+            transform: scale(1.05);
+        }
+
+        .search-category-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        .search-category-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .search-category-details {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-category-text {
+            display: flex;
+            flex-direction: column;
+            max-width: 120px;
+        }
+
+        .search-category-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .search-category-description {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .search-category-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-category-btn {
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-category-btn.nuevo {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .search-category-btn.online {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .search-category-btn.red-x {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .loading-wave {
+          width: 60px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+        }
+
+        .loading-bar {
+          width: 10px;
+          height: 10px;
+          margin: 0 2px;
+          background-color: #3498db;
+          border-radius: 5px;
+          animation: loading-wave-animation 1s ease-in-out infinite;
+        }
+
+        .loading-bar:nth-child(2) {
+          animation-delay: 0.1s;
+        }
+
+        .loading-bar:nth-child(3) {
+          animation-delay: 0.2s;
+        }
+
+        .loading-bar:nth-child(4) {
+          animation-delay: 0.3s;
+        }
+
+        @keyframes loading-wave-animation {
+          0% {
+            height: 10px;
+          }
+
+          50% {
+            height: 30px;
+          }
+
+          100% {
+            height: 10px;
+          }
+        }
+
+        .platform-description {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .help-contact-section {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .help-contact-text {
+            flex-grow: 1;
+            margin-right: 15px;
+        }
+
+        .help-contact-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .help-contact-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .help-contact-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .help-contact-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .copyright-section {
+            text-align: center;
+            padding: 15px;
+            background-color: #f5f5f5;
+            color: #666;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .terms-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        .terms-modal-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Updated Comprar button styles */
+        .Btn {
+            width: 130px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(15, 15, 15);
+            border: none;
+            color: white;
+            font-weight: 600;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+            position: relative;
+            overflow: hidden;
+            transition-duration: .3s;
+        }
+
+        .svgIcon {
+            width: 16px;
+        }
+
+        .svgIcon path {
+            fill: white;
+        }
+
+        .Btn::before {
+            width: 130px;
+            height: 130px;
+            position: absolute;
+            content: "";
+            background-color: white;
+            border-radius: 50%;
+            left: -100%;
+            top: 0;
+            bodystyle: .3s;
+            mix-blend-mode: difference;
+        }
+
+        .Btn:hover::before {
+            transition-duration: .3s;
+            transform: translate(100%,-50%);
+            border-radius: 0;
+        }
+
+        .Btn:active {
+            transform: translate(5px,5px);
+            transition-duration: .3s;
+        }
+
+        @media (max-width: 768px) {
+            .search-categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .search-category-text {
+                max-width: 100px;
+            }
+
+            .search-category-description {
+                font-size: 10px;
+            }
+        }
+
+        .banner-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            max-height: 150px;
+            object-fit: cover;
+            margin: 10px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .credits-banner {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .credits-banner-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Updated Profile Section Styles */
+        .profile-section {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(-45deg);
+            z-index: 1;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            letter-spacing: 0.3px;
+        }
+
+        .profile-email {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+            word-break: break-all;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        .profile-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            opacity: 0.7;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* New logout button styles */
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            opacity: 0.7;
+        }
+
+        .logout-icon {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-banner">
+        <div class="banner-left">
+            <div class="logo">
+                <img src="https://i.ibb.co/vvZWdRpX/Black-and-White-Modern-Streetwear-Logo-removebg-preview.png" alt="BO Logo">
+            </div>
+        </div>
+        <div class="banner-right">
+            <div class="price-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" preserveAspectRatio="xMidYMid" viewBox="0 0 256 256">
+                    <path fill="#ffffff" d="M128 23.064c34.177 0 38.225.13 51.722.745 12.48.57 19.258 2.655 23.769 4.408 5.974 2.322 10.238 5.096 14.717 9.575 4.48 4.479 7.253 8.743 9.575 14.717 1.753 4.511 3.838 11.289 4.408 23.768.615 13.498.745 17.546.745 51.723 0 34.178-.13 38.226-.745 51.723-.57 12.48-2.655 19.257-4.408 23.768-2.322 5.974-5.096 10.239-9.575 14.718-4.479 4.479-8.743 7.253-14.717 9.574-4.511 1.753-11.289 3.839-23.769 4.408-13.495.616-17.543.746-51.722.746-34.18 0-38.228-.13-51.723-.746-12.48-.57-19.257-2.655-23.768-4.408-5.974-2.321-10.239-5.095-14.718-9.574-4.479-4.48-7.253-8.744-9.574-14.718-1.753-4.51-3.839-11.288-4.408-23.768-.616-13.497-.746-17.545-.746-51.723 0-34.177.13-38.225.746-51.722.57-12.48 2.655-19.258 4.408-23.769 2.321-5.974 5.095-10.238 9.574-14.717 4.48-4.48 8.744-7.253 14.718-9.575 4.51-1.753 11.288-3.838 23.768-4.408 13.497-.615 17.545-.745 51.723-.745M128 0C93.237 0 88.878.147 75.226.77c-13.625.622-22.93 2.786-31.071 5.95-8.418 3.271-15.556 7.648-22.672 14.764C14.367 28.6 9.991 35.738 6.72 44.155 3.555 52.297 1.392 61.602.77 75.226.147 88.878 0 93.237 0 128c0 34.763.147 39.122.77 52.774.622 13.625 2.785 22.93 5.95 31.071 3.27 8.417 7.647 15.556 14.763 22.672 7.116 7.116 14.254 11.492 22.672 14.763 8.142 3.165 17.446 5.328 31.07 5.95 13.653.623 18.012.77 52.775.77s39.122-.147 52.774-.77c13.624-.622 22.929-2.785 31.07-5.95 8.418-3.27 15.556-7.647 22.672-14.763 7.116-7.116 11.493-14.254 14.764-22.672 3.164-8.142 5.328-17.446 5.95-31.07.623-13.653.77-18.012.77-52.775s-.147-39.122-.77-52.774c-.622-13.624-2.786-22.929-5.95-31.07-3.271-8.418-7.648-15.556-14.764-22.672C227.4 14.368 220.262 9.99 211.845 6.72c-8.142-3.164-17.447-5.328-31.071-5.95C167.122.147 162.763 0 128 0Zm0 62.27C91.698 62.27 62.27 91.7 62.27 128c0 36.302 29.428 65.73 65.73 65.73 36.301 0 65.73-29.428 65.73-65.73 0-36.301-29.429-65.73-65.73-65.73Zm0 108.397c-23.564 0-42.667-19.103-42.667-42.667S104.436 85.333 128 85.333s42.667 19.103 42.667 42.667-19.103 42.667-42.667 42.667Zm83.686-110.994c0 8.484-6.876 15.36-15.36 15.36-8.483 0-15.36-6.876-15.36-15.36 0-8.483 6.877-15.36 15.36-15.36 8.484 0 15.36 6.877 15.36 15.36Z"/>
+                </svg>
+            </div>
+            <div class="profile-pic">
+                <img src="https://i.ibb.co/d0xj3PP/c9a933238ff4e23384fcfa44694e81e2.jpg" alt="Profile Picture">
+            </div>
+            <button class="logout-btn" id="logout-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="logout-icon">
+                    <path d="M16 17l-5-5 5-5V7l-5 5 5 5zM9 17h2v-2H9zM6 3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4h-2v4H6V5h14v4h2V5c0-1.1-.9-2-2-2z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+                Salir
+            </button>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="profile-section">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="https://i.ibb.co/d0xj3PP/c9a933238ff4e23384fcfa44694e81e2.jpg" alt="Profile Picture">
+                </div>
+                <div class="profile-info">
+                    <h2 class="profile-name">Juan Pérez</h2>
+                    <p class="profile-email">juan.perez@saturn360.com</p>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="stat-label">VIP</div>
+                            <div class="stat-value">❌️</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-label">S360</div>
+                            <div class="stat-value">❌️</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-label">SERVICE</div>
+                            <div class="stat-value">✔️</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="credits-section">
+            <div class="credits-header">
+                <div class="credits-title">Recargar Créditos</div>
+            </div>
+            <div class="credits-action">
+                <div class="credits-description">
+                    Las Recargas de creditos solo se hacen con el Creador ‼️
+                </div>
+                <a href="https://wa.me/51967194426?text=Hola,%20Recarga%20Creditos%20Saturn360" target="_blank" class="credits-recharge-link">
+                    <button class="Btn">
+                        Recargar
+                        <svg class="svgIcon" viewBox="0 0 576 512"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="credits-banner">
+            <img src="https://i.ibb.co/V0jtL3LM/Ahora.png" alt="Credits Banner" class="credits-banner-image">
+        </div>
+
+        <div class="search-categories">
+            <div class="search-categories-title">Servicio 𝙎𝙖𝙩𝙪𝙍𝙽 𝟯𝟲𝟬</div>
+            <div class="search-categories-grid">
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">DNI</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">Teléfono</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">Justicia</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">Requisitoria</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">Denuncias</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">Educación</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-category-item">
+                    <div class="search-category-details">
+                        <div class="search-category-text">
+                            <div class="search-category-title">Streaming</div>
+                            <div class="search-category-description"></div>
+                        </div>
+                        <div class="search-category-buttons">
+                            <div class="loading-wave">
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                                <div class="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="platform-description">
+            𝙎𝙖𝙩𝙪𝙍𝙽 𝟯𝟲𝟬 Tú aliado estratégico en la era de la información somos una plataforma que facilita el acceso a información diversa, pero no se hace responsable de su contenido ni de su uso. La información se proporciona únicamente con fines informativos, y el usuario es responsable de verificarla y utilizarla de manera consciente y responsable.
+        </div>
+
+        <div class="help-contact-section">
+            <div class="help-contact-text">
+                <div class="help-contact-title">Necesitas ayuda!</div>
+                <div class="help-contact-description">Contáctame para resolver cualquier duda o problema que tengas</div>
+            </div>
+            <a href="https://t.me/saturn360admin" target="_blank" class="help-contact-link">
+                <button class="help-contact-button">Contactar</button>
+            </a>
+        </div>
+
+        <div class="copyright-section">
+            <span>Copyright 2025 Consultas Términos y Condiciones</span>
+        </div>
+    </div>
+
+    <div class="terms-modal" id="terms-modal" style="display: none;">
+        <div class="terms-modal-content">
+            <h2 style="text-align: center; margin-bottom: 20px;">Términos y Condiciones</h2>
+            <div id="terms-content" style="text-align: left; line-height: 1.6;">
+                <!-- Terms and conditions text will be inserted here -->
+            </div>
+            <button id="close-terms-modal" style="display: block; width: 100%; padding: 10px; margin-top: 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                // Redirect to login if no user is logged in
+                window.location.href = 'index.html';
+            } else {
+                // Update profile section with user details
+                document.querySelector('.profile-name').textContent = currentUser.name || 'Usuario';
+                document.querySelector('.profile-email').textContent = currentUser.email;
+            }
+        });
+
+        const copyrightSection = document.querySelector('.copyright-section');
+        const termsModal = document.getElementById('terms-modal');
+        const termsContent = document.getElementById('terms-content');
+        const closeTermsModal = document.getElementById('close-terms-modal');
+
+        copyrightSection.addEventListener('click', () => {
+            termsContent.innerHTML = `
+                <p>Al utilizar nuestros servicios, usted acepta los siguientes términos y condiciones:</p>
+
+                <h3>No hay reembolsos</h3>
+                <p>Una vez realizada una transacción o compra en nuestro sitio web, no se realizarán reembolsos bajo ninguna circunstancia. Al completar una transacción, usted acepta renunciar a su derecho a solicitar un reembolso.</p>
+
+                <h3>Cambios constantes</h3>
+                <p>Nuestro sitio web y servicios están en constante evolución y cambio. Nos reservamos el derecho de modificar, actualizar o eliminar cualquier función, contenido o servicio en cualquier momento sin previo aviso. Es responsabilidad del usuario revisar los términos y condiciones periódicamente para estar informado de cualquier cambio.</p>
+
+                <h3>Información en tiempo real</h3>
+                <p>Aunque nos esforzamos por proporcionar información precisa y actualizada, no garantizamos que la información presentada en nuestro sitio web sea 100% precisa en tiempo real. La información en nuestro sitio web puede estar sujeta a retrasos, errores u omisiones, y no nos hacemos responsables de ninguna consecuencia que pueda surgir debido a la confianza en dicha información.</p>
+
+                <h3>Uso de la información</h3>
+                <p>Los usuarios de nuestro sitio web aceptan que toda la información proporcionada en nuestro sitio web es solo para fines informativos y no debe ser considerada como asesoramiento legal, financiero, de inversión o de otro tipo. El uso de cualquier información obtenida de nuestro sitio web es bajo el propio riesgo y responsabilidad del usuario.</p>
+
+                <h3>Derechos de propiedad intelectual</h3>
+                <p>Todo el contenido disponible en nuestro sitio web, incluyendo, entre otros, textos, gráficos, logotipos, imágenes, vídeos y software, es propiedad de nuestra empresa o de sus respectivos titulares de derechos y está protegido por las leyes internacionales de derechos de autor. Los usuarios no pueden copiar, modificar, distribuir, vender, alquilar, sublicenciar, transmitir, reproducir o crear obras derivadas de dicho contenido sin el consentimiento previo por escrito del titular de los derechos correspondientes.</p>
+
+                <h3>Contacto</h3>
+                <p>Si tiene alguna pregunta o inquietud sobre estos términos y condiciones, puede ponerse en contacto con nosotros a través de soporte@saturn360.xyz.</p>
+            `;
+            termsModal.style.display = 'flex';
+        });
+
+        closeTermsModal.addEventListener('click', () => {
+            termsModal.style.display = 'none';
+        });
+
+        termsModal.addEventListener('click', (event) => {
+            if (event.target === termsModal) {
+                termsModal.style.display = 'none';
+            }
+        });
+
+        // Logout functionality
+        const logoutBtn = document.getElementById('logout-btn');
+        logoutBtn.addEventListener('click', () => {
+            // Remove current user from localStorage
+            localStorage.removeItem('currentUser');
+            
+            // Redirect to login page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
